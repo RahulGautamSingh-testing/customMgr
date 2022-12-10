@@ -1,0 +1,16 @@
+{ 
+  "extends":["customManagers:dockerfileVersions"],
+  "enabledManagers": ["custom"],
+  "customManagers":[
+  {
+  "fileMatch": ["^Dockerfile$"],
+      "matchStringsStrategy": "any",
+      "customType": "regex",
+      "matchStrings": [
+        "ENV [A-Z]+_VERSION=(?<currentValue>.*) # (?<datasource>.*?)/(?<depName>.*?)(\\&versioning=(?<versioning>.*?))?\\s",
+        "FROM (?<depName>\\S*):(?<currentValue>\\S*)"
+      ],
+      "datasourceTemplate": "docker"
+  }
+  ]
+}
